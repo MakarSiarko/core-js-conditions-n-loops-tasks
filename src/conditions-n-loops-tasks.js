@@ -101,15 +101,13 @@ function canQueenCaptureKing(queen, king) {
  *  3, 0, 3   => false
  */
 function isIsoscelesTriangle(a, b, c) {
-  let answer;
-  if (a === b || a === c) {
-    answer = true;
-  } else if (b === a || b === c) {
-    answer = true;
-  } else if (c === a || c === b) {
-    answer = true;
-  } else answer = false;
-  return answer;
+  if (a <= 0 || b <= 0 || c <= 0) {
+    return false;
+  }
+  if (a + b <= c || a + c <= b || b + c <= a) {
+    return false;
+  }
+  return a === b || a === c || b === c;
 }
 
 /**
@@ -126,8 +124,31 @@ function isIsoscelesTriangle(a, b, c) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+
+function convertToRomanNumerals(num) {
+  let roman = '';
+  let answer = num;
+  while (answer >= 10) {
+    roman += 'X';
+    answer -= 10;
+  }
+  if (answer >= 9) {
+    roman += 'IX';
+    answer -= 9;
+  }
+  if (answer >= 5) {
+    roman += 'V';
+    answer -= 5;
+  }
+  if (answer >= 4) {
+    roman += 'IV';
+    answer -= 4;
+  }
+  while (answer >= 1) {
+    roman += 'I';
+    answer -= 1;
+  }
+  return roman;
 }
 
 /**
@@ -145,8 +166,57 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let result = '';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    switch (numberStr[i]) {
+      case '0':
+        result += 'zero';
+        break;
+      case '1':
+        result += 'one';
+        break;
+      case '2':
+        result += 'two';
+        break;
+      case '3':
+        result += 'three';
+        break;
+      case '4':
+        result += 'four';
+        break;
+      case '5':
+        result += 'five';
+        break;
+      case '6':
+        result += 'six';
+        break;
+      case '7':
+        result += 'seven';
+        break;
+      case '8':
+        result += 'eight';
+        break;
+      case '9':
+        result += 'nine';
+        break;
+      case '.':
+        result += 'point';
+        break;
+      case '-':
+        result += 'minus';
+        break;
+      case ',':
+        result += 'point';
+        break;
+      default:
+        result = false;
+    }
+    if (i < numberStr.length - 1) {
+      result += ' ';
+    }
+  }
+  return result;
 }
 
 /**
@@ -213,8 +283,16 @@ function getIndexOf(str, letter) {
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(/* num, digit */) {
-  throw new Error('Not implemented');
+function isContainNumber(num, digit) {
+  const str = `${num}`;
+  let answer;
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === `${digit}`) {
+      answer = true;
+      break;
+    } else answer = false;
+  }
+  return answer;
 }
 
 /**
